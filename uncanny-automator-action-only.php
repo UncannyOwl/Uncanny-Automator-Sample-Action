@@ -30,8 +30,9 @@ class Uncanny_Automator_Action_Only {
 		if ( empty( $add_to_integration ) ) {
 			return $integrations;
 		}
+		$action = __DIR__ . '/uoa-shownotice.php';
 
-		return $integrations;
+		return automator_add_action( $integrations, $action, $add_to_integration );
 	}
 }
 
