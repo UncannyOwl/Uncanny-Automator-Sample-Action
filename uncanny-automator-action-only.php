@@ -11,3 +11,28 @@
  * License:           GPL-3.0+
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  */
+class Uncanny_Automator_Action_Only {
+	/**
+	 * Uncanny_Automator_Trigger_Only constructor.
+	 */
+	public function __construct() {
+		add_filter( 'automator_integrations_setup', array( $this, 'load_action' ) );
+	}
+
+	/**
+	 * @param $integrations
+	 *
+	 * @return array|mixed
+	 */
+	public function load_action( $integrations ) {
+		// Let's find integration by name so that action can be added it's list.
+		$add_to_integration = automator_get_integration_by_name( 'Uncanny Automator' );
+		if ( empty( $add_to_integration ) ) {
+			return $integrations;
+		}
+
+		return $integrations;
+	}
+}
+
+new Uncanny_Automator_Action_Only();
