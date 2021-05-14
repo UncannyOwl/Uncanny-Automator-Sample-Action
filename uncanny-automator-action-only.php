@@ -16,23 +16,22 @@ class Uncanny_Automator_Action_Only {
 	 * Uncanny_Automator_Trigger_Only constructor.
 	 */
 	public function __construct() {
-		add_filter( 'automator_integrations_setup', array( $this, 'load_action' ) );
+		add_action( 'automator_configuration_complete', array( $this, 'load_action' ) );
 	}
 
 	/**
-	 * @param $integrations
 	 *
-	 * @return array|mixed
+	 * @return bool|null
 	 */
-	public function load_action( $integrations ) {
+	public function load_action() {
 		// Let's find integration by name so that action can be added it's list.
 		$add_to_integration = automator_get_integration_by_name( 'Uncanny Automator' );
 		if ( empty( $add_to_integration ) ) {
-			return $integrations;
+			return null;
 		}
 		$action = __DIR__ . '/uoa-shownotice.php';
 
-		return automator_add_action( $integrations, $action, $add_to_integration );
+		automator_add_action( $action, $add_to_integration );
 	}
 }
 
